@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Школа Карелиной — первый экран</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#F2ECE4;--paper:#FAF6F0;--ink:#161211;--ink2:#3A3230;--mute:#8A7F78;--pig:#7B1530;--gold:#C8A46A;--line:rgba(22,18,17,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink);color:var(--ink);font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+a{color:inherit;text-decoration:none}
+.v{display:none;min-height:100svh;position:relative;overflow:hidden}
+.v.on{display:block}
+/* switcher */
+.sw{position:fixed;z-index:50;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:4px;background:rgba(20,16,15,.82);backdrop-filter:blur(10px);padding:5px;border-radius:40px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.sw button{border:0;background:transparent;color:#cfc6bf;font:600 12px Manrope;letter-spacing:.04em;padding:9px 16px;border-radius:30px;cursor:pointer}
+.sw button.on{background:var(--ivory);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:17px 28px;border-radius:60px;font:600 14px Manrope;letter-spacing:.02em;cursor:pointer;border:0;transition:transform .25s,background .25s}
+.btn:hover{transform:translateY(-2px)}
+.nav{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:26px clamp(16px,4vw,56px);font-size:13px}
+.nav .logo{font-family:"Cormorant Garamond";font-size:24px;letter-spacing:.32em;font-weight:500}
+.nav ul{display:flex;gap:30px;list-style:none;opacity:.75}
+@media(max-width:860px){.nav ul{display:none}}
+
+/* ============ A: ОДНА ЛИНИЯ ============ */
+#a{background:radial-gradient(120% 90% at 70% 30%,#2a2220 0%,#141110 60%);color:var(--ivory)}
+#a .nav{color:var(--ivory)}
+#a .ph{position:absolute;right:0;bottom:0;height:100%;width:min(48vw,640px);background:url(img/sv-leo.jpg) center 20%/cover;filter:grayscale(1) contrast(1.05);mask-image:linear-gradient(90deg,transparent 0,#000 30%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);opacity:.9}
+#a .wrap{position:relative;z-index:2;padding:clamp(120px,18vh,190px) clamp(16px,4vw,56px) 110px;max-width:900px}
+#a .kick{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
+#a .kick:before{content:"";width:40px;height:1px;background:var(--gold)}
+#a h1{font-family:"Cormorant Garamond";font-weight:400;font-size:clamp(52px,8.2vw,124px);line-height:.92;letter-spacing:-.02em;margin:28px 0 0}
+#a h1 em{font-style:italic;color:var(--gold)}
+#a .stage{position:relative;height:clamp(90px,13vw,150px);margin:6px 0 10px;max-width:640px}
+#a svg{width:100%;height:100%;overflow:visible}
+#a svg path{fill:none;stroke:var(--gold);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#a .zone{position:absolute;right:0;top:50%;font:500 11px Manrope;letter-spacing:.3em;text-transform:uppercase;color:#bfb2a6;transition:opacity .4s}
+#a p.lead{font-size:clamp(15px,1.3vw,18px);line-height:1.6;color:#cfc4ba;max-width:470px}
+#a .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+#a .b1{background:var(--gold);color:var(--ink)} #a .b2{background:transparent;color:var(--ivory);box-shadow:inset 0 0 0 1px rgba(242,236,228,.3)}
+#a .facts{display:flex;gap:clamp(22px,4vw,56px);margin-top:54px;flex-wrap:wrap}
+#a .facts b{display:block;font-family:"Cormorant Garamond";font-size:40px;font-weight:400;color:var(--ivory);line-height:1}
+#a .facts span{font-size:12px;color:#a2968c;letter-spacing:.04em}
+@media(max-width:860px){#a .ph{width:100%;opacity:.28;mask-image:none;-webkit-mask-image:none}}
+
+/* ============ B: ЖУРНАЛ ============ */
+#b{background:var(--paper);color:var(--ink)}
+#b .cover{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr minmax(320px,520px) 1fr;align-items:end;padding:0 clamp(16px,4vw,56px)}
+#b .mast{position:absolute;left:0;right:0;top:clamp(70px,10vh,100px);text-align:center;font-family:"Cormorant Garamond";font-weight:500;font-size:clamp(84px,21vw,330px);line-height:.8;letter-spacing:-.02em;color:var(--pig);z-index:1;white-space:nowrap}
+#b .issue{position:absolute;left:0;right:0;top:clamp(48px,7vh,72px);display:flex;justify-content:space-between;padding:0 clamp(16px,4vw,56px);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);z-index:3}
+#b .por{grid-column:2;position:relative;z-index:2;height:min(86svh,880px);background:url(img/sv-hand.jpg) center top/cover;mix-blend-mode:multiply;filter:grayscale(1) contrast(1.08)}
+#b .cl{z-index:3;align-self:center;padding-top:22vh;display:flex;flex-direction:column;gap:34px}
+#b .cl.r{text-align:right;align-items:flex-end}
+#b .ln small{display:block;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--pig);margin-bottom:6px;font-weight:600}
+#b .ln div{font-family:"Cormorant Garamond";font-size:clamp(22px,2.2vw,32px);line-height:1.05;max-width:300px}
+#b .ln div i{color:var(--pig)}
+#b .big div{font-size:clamp(34px,3.6vw,56px)}
+#b .bar{position:absolute;left:clamp(16px,4vw,56px);right:clamp(16px,4vw,56px);bottom:84px;z-index:4;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px;gap:16px}
+#b .bar .who{font-size:13px;color:var(--ink2)} #b .bar .who b{color:var(--ink)}
+#b .btn{background:var(--ink);color:var(--paper)}
+#b .code{display:flex;gap:2px;height:36px;align-items:stretch}
+#b .code i{background:var(--ink);display:block}
+@media(max-width:860px){#b .cover{grid-template-columns:1fr;align-items:start}#b .por{grid-column:1;grid-row:1;height:70svh;margin-top:22vw}#b .cl{padding-top:0;grid-row:auto;align-items:flex-start!important;text-align:left!important;gap:20px;margin:24px 0}#b .cl.r{margin-bottom:180px}#b .bar{flex-direction:column;align-items:flex-start;bottom:70px}#b .code{display:none}}
+
+/* ============ C: ТВОЯ НОВАЯ ЖИЗНЬ ============ */
+#c{background:var(--ivory);color:var(--ink)}
+#c .nav .logo{color:var(--ink)}
+#c .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,64px);padding:clamp(110px,15vh,150px) clamp(16px,4vw,56px) 110px;min-height:100svh;align-items:center}
+#c .q{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+#c .chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 40px}
+#c .chip{border:1px solid var(--line);background:transparent;border-radius:40px;padding:11px 18px;font:500 14px Manrope;cursor:pointer;color:var(--ink2);transition:.25s}
+#c .chip.on{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+#c h1{font-family:"Cormorant Garamond";font-weight:400;font-size:clamp(46px,6.2vw,96px);line-height:.95;letter-spacing:-.02em;min-height:2.85em;transition:opacity .3s}
+#c h1 em{color:var(--pig)}
+#c .lead{font-size:clamp(15px,1.25vw,18px);line-height:1.6;color:var(--ink2);max-width:520px;margin-top:22px;min-height:4.8em;transition:opacity .3s}
+#c .fade{opacity:0}
+#c .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+#c .b1{background:var(--pig);color:#fff} #c .b2{background:transparent;box-shadow:inset 0 0 0 1px var(--line);color:var(--ink)}
+#c .card{background:var(--paper);border-radius:28px;padding:clamp(24px,3vw,40px);box-shadow:0 30px 80px -30px rgba(60,30,20,.25);position:relative;overflow:hidden}
+#c .card .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+#c .sum{font-family:"Cormorant Garamond";font-size:clamp(58px,6vw,92px);line-height:1;margin:18px 0 4px;font-variant-numeric:lining-nums tabular-nums}
+#c .sum small{font-size:.4em;color:var(--mute)}
+#c .sub{font-size:14px;color:var(--ink2)}
+#c .sub b{color:var(--pig)}
+#c .rg{margin-top:26px}
+#c .rg label{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2);margin-bottom:10px}
+#c .rg label b{color:var(--ink)}
+#c input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:var(--line);outline:none}
+#c input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--ink);border:4px solid var(--paper);box-shadow:0 0 0 1px var(--ink);cursor:pointer}
+#c input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--ink);border:4px solid var(--paper);cursor:pointer}
+#c .brow{margin:28px -40px -40px;height:150px;background:url(img/brow.jpg) center 40%/cover;position:relative}
+#c .brow span{position:absolute;left:20px;bottom:14px;background:rgba(250,246,240,.9);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:20px}
+#c .ava{display:flex;align-items:center;gap:14px;margin-top:36px;font-size:13px;color:var(--ink2)}
+#c .ava i{width:46px;height:46px;border-radius:50%;background:url(img/sv-leo.jpg) center 15%/cover;filter:grayscale(1);flex:none}
+@media(max-width:900px){#c .grid{grid-template-columns:1fr}#c h1{min-height:0}#c .brow{margin:28px -24px -24px}}
+</style>
+</head>
+<body>
+
+<!-- A -->
+<section class="v on" id="a">
+  <nav class="nav"><a class="logo">TOPLINE</a><ul><li>Курсы</li><li>Программа</li><li>Работы учениц</li><li>О Светлане</li></ul><a>+7 903 009-89-13</a></nav>
+  <div class="ph"></div>
+  <div class="wrap">
+    <div class="kick">Школа перманентного макияжа Светланы Карелиной</div>
+    <h1>Одна линия —<br>и у вас <em>новая</em><br>профессия</h1>
+    <div class="stage">
+      <svg viewBox="0 0 640 150" preserveAspectRatio="xMinYMid meet"><path id="ln" d=""/></svg>
+      <div class="zone" id="zn">брови</div>
+    </div>
+    <p class="lead">4 дня в студии на Крылатском, 10 живых моделей и диплом гос. образца. Брови, губы, межресничка — с нуля до первых клиентов.</p>
+    <div class="ctas"><a class="btn b1">Бесплатный тест-драйв →</a><a class="btn b2">Курсы от 55 000 ₽</a></div>
+    <div class="facts"><div><b>7 лет</b><span>преподаю</span></div><div><b>10</b><span>моделей на курсе</span></div><div><b>IP Awards</b><span>номинант 2022–2024</span></div></div>
+  </div>
+</section>
+
+<!-- B -->
+<section class="v" id="b">
+  <div class="cover">
+    <div class="issue"><span>Выпуск №01 · Москва</span><span>Школа перманента</span><span>от 9 900 ₽ / мес</span></div>
+    <div class="mast">TOPLINE</div>
+    <div class="cl">
+      <div class="ln big"><small>Главная тема</small><div>4 дня —<br>и вы <i>мастер</i></div></div>
+      <div class="ln"><small>Деньги</small><div>66 000 → 220 000 ₽ в месяц: честная математика</div></div>
+    </div>
+    <div class="por"></div>
+    <div class="cl r">
+      <div class="ln"><small>Награда</small><div>IP Awards 2024 — <i>лучший Lips artist</i></div></div>
+      <div class="ln"><small>Подарок</small><div>Аппарат, на котором работает Светлана</div></div>
+      <div class="ln"><small>Внутри</small><div>Методичка на 115 страниц</div></div>
+    </div>
+    <div class="bar">
+      <div class="who"><b>Светлана Карелина</b> — бренд-тренер, владелица двух студий</div>
+      <a class="btn">Записаться на тест-драйв →</a>
+      <div class="code" id="code"></div>
+    </div>
+  </div>
+</section>
+
+<!-- C -->
+<section class="v" id="c">
+  <nav class="nav"><a class="logo">TOPLINE</a><ul><li>Курсы</li><li>Программа</li><li>Работы учениц</li><li>О Светлане</li></ul><a>WhatsApp</a></nav>
+  <div class="grid">
+    <div>
+      <div class="q">Кто вы сейчас?</div>
+      <div class="chips" id="chips">
+        <button class="chip on" data-k="mama">Мама в декрете</button>
+        <button class="chip" data-k="job">Работаю в найме</button>
+        <button class="chip" data-k="master">Уже мастер красоты</button>
+        <button class="chip" data-k="stud">Студентка</button>
+      </div>
+      <h1 id="h"></h1>
+      <p class="lead" id="ld"></p>
+      <div class="ctas"><a class="btn b1">Бесплатный тест-драйв →</a><a class="btn b2">Сравнить тарифы</a></div>
+      <div class="ava"><i></i><span><b style="color:var(--ink)">Светлана Карелина</b><br>бренд-тренер, номинант IP Awards 2022–2024</span></div>
+    </div>
+    <div class="card">
+      <div class="top"><span>Ваш доход после курса</span><span>₽ / мес</span></div>
+      <div class="sum" id="sum">66 000</div>
+      <div class="sub" id="pb"></div>
+      <div class="rg"><label>Стоимость процедуры <b id="pv"></b></label><input type="range" id="pr" min="3000" max="9000" step="500" value="3000"></div>
+      <div class="rg"><label>Клиентов в день <b id="cv"></b></label><input type="range" id="cl" min="1" max="3" step="1" value="1"></div>
+      <div class="rg"><label>Рабочих дней в месяц <b id="dv"></b></label><input type="range" id="dy" min="8" max="26" step="1" value="22"></div>
+      <div class="brow"><span>Работа Светланы · пудровые брови</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="sw"><button data-v="a" class="on">A · Линия</button><button data-v="b">B · Журнал</button><button data-v="c">C · Новая жизнь</button></div>
+
+<script>
+// switcher
+const sw=[...document.querySelectorAll('.sw button')];
+function show(id){document.querySelectorAll('.v').forEach(s=>s.classList.toggle('on',s.id===id));sw.forEach(b=>b.classList.toggle('on',b.dataset.v===id));try{history.replaceState(null,'','#'+id)}catch(e){}}
+sw.forEach(b=>b.onclick=()=>show(b.dataset.v));
+if(['#a','#b','#c'].includes(location.hash))show(location.hash.slice(1));
+
+// A: line drawing — brow → lips → lash line
+const shapes=[
+ ['брови','M20 110 C 120 70, 230 30, 330 34 C 400 37, 440 60, 470 96 M 330 34 C 300 50, 200 80, 60 112'],
+ ['губы','M40 80 C 120 70, 200 40, 260 52 C 290 58, 310 72, 320 72 C 330 72, 350 58, 380 52 C 440 40, 520 70, 600 80 C 520 120, 420 140, 320 140 C 220 140, 120 120, 40 80 M40 80 C 200 92, 440 92, 600 80'],
+ ['межресничка','M30 90 C 140 40, 320 22, 460 58 C 520 74, 560 90, 600 96 M30 90 C 150 112, 340 118, 600 96']
+];
+const ln=document.getElementById('ln'),zn=document.getElementById('zn');let si=0;
+function draw(){const [n,d]=shapes[si];ln.setAttribute('d',d);zn.textContent=n;const L=ln.getTotalLength();
+ ln.style.transition='none';ln.style.strokeDasharray=L;ln.style.strokeDashoffset=L;ln.getBoundingClientRect();
+ ln.style.transition='stroke-dashoffset 2.4s cubic-bezier(.6,.1,.2,1)';ln.style.strokeDashoffset=0;
+ si=(si+1)%shapes.length;}
+draw();setInterval(draw,3600);
+
+// B: barcode
+const code=document.getElementById('code');for(let i=0;i<34;i++){const e=document.createElement('i');e.style.width=(1+((i*7)%4))+'px';code.appendChild(e)}
+
+// C: personas + calc
+const P={
+ mama:['Профессия, которая <em>живёт</em> по режиму ребёнка','Один клиент в день, 2–3 часа — пока малыш в саду. Работайте из дома или в студии и возвращайтесь из декрета уже с доходом.'],
+ job:['Уйти из найма за <em>4 дня</em> обучения','Без медицинского образования. Онлайн-теория заранее, 4 дня практики на живых моделях — и вы дипломированный мастер с портфолио.'],
+ master:['Добавьте услугу с чеком <em>от 5 000 ₽</em>','Ваши клиентки уже доверяют вам. Перманент бровей, губ и век — самая маржинальная услуга в бьюти: себестоимость минимальна.'],
+ stud:['Зарабатывайте <em>между</em> парами','Свободный график и 66 000 ₽ уже в первый месяц — при одном клиенте в день. Профессия, которая остаётся с вами навсегда.']
+};
+const h=document.getElementById('h'),ld=document.getElementById('ld');
+function persona(k){[h,ld].forEach(e=>e.classList.add('fade'));setTimeout(()=>{h.innerHTML=P[k][0];ld.textContent=P[k][1];[h,ld].forEach(e=>e.classList.remove('fade'))},220)}
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c));persona(c.dataset.k)});
+h.innerHTML=P.mama[0];ld.textContent=P.mama[1];
+const fmt=n=>Math.round(n).toLocaleString('ru-RU');
+const pr=document.getElementById('pr'),cl=document.getElementById('cl'),dy=document.getElementById('dy'),sum=document.getElementById('sum');let cur=66000,raf;
+function calc(){const p=+pr.value,c=+cl.value,d=+dy.value,t=p*c*d;
+ document.getElementById('pv').textContent=fmt(p)+' ₽';document.getElementById('cv').textContent=c;document.getElementById('dv').textContent=d;
+ const days=Math.ceil(99000/(p*c));document.getElementById('pb').innerHTML='Базовый курс за 99 000 ₽ окупится за <b>'+days+' '+(days%10==1&&days%100!=11?'рабочий день':(days%10>=2&&days%10<=4&&(days%100<10||days%100>=20)?'рабочих дня':'рабочих дней'))+'</b>';
+ cancelAnimationFrame(raf);const from=cur,st=performance.now();(function tick(now){const k=Math.min(1,(now-st)/500),e=1-Math.pow(1-k,3);cur=from+(t-from)*e;sum.innerHTML=fmt(cur);if(k<1)raf=requestAnimationFrame(tick)})(st)}
+[pr,cl,dy].forEach(i=>i.oninput=calc);calc();
+</script>
+</body>
+</html>
